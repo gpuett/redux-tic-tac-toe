@@ -1,6 +1,8 @@
 import React from 'react';
 import Board from './Board';
 import './styles.css';
+import { connect } from 'react-redux';
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -10,11 +12,14 @@ class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
-    }
+    };
   }
   handleClick(i) {
+    const { dispatch } = this.props;
+    const action = {type: 'ADD_MOVE'};
+    dispatch(action);
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[history.length - 1]
+    const current = history[history.length - 1];
     const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -43,11 +48,11 @@ class Game extends React.Component {
       const desc = move ?
         'Go to move #' + move :
         'Go to game start';
-        return (
-          <li key={move}>
-            <button onClick={() => this.jumpTo(move)}>{desc}</button>
-          </li>
-        )
+      return (
+        <li key={move}>
+          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+        </li>
+      );
     });
 
     let status;
@@ -92,4 +97,10 @@ function calculateWinner(squares) {
   return null;
 }
 
-export default Game;
+const mapStateToProps = state => {
+  return {
+    history: state
+  };
+};
+
+export default connect()(Game);
