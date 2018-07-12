@@ -25,7 +25,7 @@ export default (state = {
     newState = Object.assign({}, state, {
       stepNumber: action.currentStep,
       xIsNext: (action.currentStep % 2) === 0
-    })
+    });
     return newState;
   default:
     return state;

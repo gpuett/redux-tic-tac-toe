@@ -10,6 +10,7 @@ class Game extends React.Component {
       type: 'ADD_MOVE',
       squareId: i
     };
+    
     dispatch(action);
   }
   jumpTo(step) {
