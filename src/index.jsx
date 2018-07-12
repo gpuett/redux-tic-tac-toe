@@ -4,12 +4,12 @@ import App from './components/App';
 import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import rootReducer from './reducers/root-reducer';
+import historyReducer from './reducers/history-reducer';
 
-const store = createStore(rootReducer);
+const store = createStore(historyReducer);
 let unsubscribe = store.subscribe(() =>
   console.log(store.getState())
-); 
+);
 
 const render = (Component) => {
   ReactDOM.render(
